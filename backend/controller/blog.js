@@ -54,32 +54,19 @@ class BlogsController {
 
   async update(req, res) {
     try {
-      const { error } = validateBlog(req.body);
-      if (error) {
-        return res.status(400).json({
-          msg: error.details[0].message,
-          variant: "warning",
-          payload: null,
-        });
-      }
-      const blog = await Blogs.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-      });
-      if (!blog) {
-        return res.status(400).json({
-          msg: "Blog not found",
-          variant: "error",
-          payload: null,
-        });
-      }
+      const { id } = req.params;
+      let trimmedId = id.trim();
+      let blog = await Blogs.findByIdAndUpdate(trimmedId, req.body, { new: true });
       res.status(200).json({
-        msg: "Blog is updated",
+        msg: "Blog updated",
         variant: "success",
         payload: blog,
       });
-    } catch {
+    } catch(err) {
+      console.log(err);
+      
       res.status(500).json({
-        msg: "Server error",
+        msg: "server error",
         variant: "error",
         payload: null,
       });

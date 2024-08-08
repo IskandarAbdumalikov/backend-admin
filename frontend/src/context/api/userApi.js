@@ -21,7 +21,7 @@ export const userApi = api.injectEndpoints({
         url: "/profile",
         params,
       }),
-      providesTags: ["User"],
+      providesTags: ["Profile"],
     }),
     updateProfile: build.mutation({
       query: ({ id, body }) => ({

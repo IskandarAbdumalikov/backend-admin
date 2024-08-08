@@ -34,7 +34,7 @@ export const blogApi = api.injectEndpoints({
       query: ({ id, body }) => ({
         url: `/blogs/${id}`,
         method: "PUT",
-        body,
+        body, 
       }),
       invalidatesTags: ["Blog"],
     }),

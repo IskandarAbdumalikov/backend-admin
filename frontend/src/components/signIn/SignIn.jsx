@@ -23,7 +23,7 @@ const SignIn = () => {
     if (isSuccess || isLogin) {
       dispatch(setToken(data?.payload?.token));
       openNotificationWithIcon("success");
-      navigate("/admin");
+      navigate("/admin/blogManage");
     }
     if (isError) {
       openNotificationWithIcon("error");

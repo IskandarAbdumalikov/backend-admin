@@ -4,7 +4,7 @@ import {
   useGetBlogsQuery,
   useUpdateBlogMutation,
 } from "../../../context/api/blogApi";
-import { Modal, Button, Input, message } from "antd";
+import { Modal, Button, Input, message, Card, Col, Row } from "antd";
 
 function BlogManage() {
   const { data } = useGetBlogsQuery();
@@ -44,7 +44,7 @@ function BlogManage() {
 
   const handleEdit = async () => {
     try {
-      await editBlog({ id: currentBlog._id, ...form });
+      await editBlog({ id: currentBlog._id, body: form });
       message.success("Blog updated successfully");
       setIsModalVisible(false);
     } catch {
@@ -53,23 +53,30 @@ function BlogManage() {
   };
 
   return (
-    <div className="flex flex-col gap-6 pt-24 pl-10">
-      {data?.payload.map((item) => (
-        <div key={item._id} className="flex gap-5 text-black items-center">
-          <div>
-            <h3 className="text-lg font-bold">{item.title}</h3>
-            <p className="text-sm">{item.desc}</p>
-          </div>
-          <div className="flex gap-3">
-            <Button type="danger" onClick={() => showDeleteConfirm(item._id)}>
-              Delete
-            </Button>
-            <Button type="primary" onClick={() => showEditModal(item)}>
-              Edit
-            </Button>
-          </div>
-        </div>
-      ))}
+    <div className="pt-24 pl-10 pr-[50px]">
+      <Row gutter={[16, 16]}>
+        {data?.payload.map((item) => (
+          <Col key={item._id} xs={24} sm={12} md={8} lg={6}>
+            <Card
+              title={item.title}
+              bordered={false}
+              actions={[
+                <Button type="primary" onClick={() => showEditModal(item)}>
+                  Edit
+                </Button>,
+                <Button
+                  type="danger"
+                  onClick={() => showDeleteConfirm(item._id)}
+                >
+                  Delete
+                </Button>,
+              ]}
+            >
+              <p>{item.desc}</p>
+            </Card>
+          </Col>
+        ))}
+      </Row>
 
       <Modal
         title="Edit Blog"

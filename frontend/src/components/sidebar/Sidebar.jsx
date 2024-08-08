@@ -16,7 +16,7 @@ const Sidebar = () => {
   
   let { data } = useGetProfileQuery();
   let uCase = data?.payload?.fname.slice(0, 1).toUpperCase();
-  console.log(uCase);
+  console.log(data);
 
  
 

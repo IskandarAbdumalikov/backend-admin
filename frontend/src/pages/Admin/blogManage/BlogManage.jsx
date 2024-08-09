@@ -73,6 +73,7 @@ function BlogManage() {
               ]}
             >
               <p>{item.desc}</p>
+              <p style={{ marginTop: "10px" }}>Made by :  {item?.userId?.fname}</p>
             </Card>
           </Col>
         ))}

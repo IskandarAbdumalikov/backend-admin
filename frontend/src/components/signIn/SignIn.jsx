@@ -15,11 +15,11 @@ const SignIn = () => {
   useEffect(() => {
     if (isSuccess || isLogin) {
       dispatch(setToken(data?.payload?.token));
-      message.success("Blog deleted successfully");   
+      message.success("Welcome to dashboard");   
       navigate("/admin/blogManage");
     }
     if (isError) {
-      message.success("Username or password is incorrect");   
+      message.error("Username or password is incorrect");   
       
     }
   }, [isSuccess, isError, isLogin]);

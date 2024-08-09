@@ -216,7 +216,9 @@ class UsersController {
   }
   async getAllUsers(req, res) {
     try {
-      const users = await Users.find().sort({ createdAt: -1 });
+      const users = (await Users.find().sort({ createdAt: -1 })).filter(
+        (el) => el.role !== "owner"
+      );
       res.status(200).json({
         msg: "Users fetched successfully",
         variant: "success",
@@ -224,7 +226,7 @@ class UsersController {
       });
     } catch (err) {
       res.status(500).json({
-        msg: err.message,
+        msg: "Server error",
         variant: "error",
         payload: null,
       });

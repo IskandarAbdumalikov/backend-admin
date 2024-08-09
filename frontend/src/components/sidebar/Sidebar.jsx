@@ -13,12 +13,10 @@ import { Avatar } from "antd";
 const Sidebar = () => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
-  
+
   let { data } = useGetProfileQuery();
   let uCase = data?.payload?.fname.slice(0, 1).toUpperCase();
   console.log(data);
-
- 
 
   return (
     <div className="sidebar">
@@ -61,6 +59,36 @@ const Sidebar = () => {
             <span>Manage Blog</span>
           </Link>
         </li>
+        {data?.payload?.role === "owner" ? (
+          <li className="sidebar__item">
+            <Link
+              className={`sidebar__link ${
+                isActive("/admin/userManage") ? "active" : ""
+              }`}
+              to={"/admin/userManage"}
+            >
+              <AiOutlineProduct />
+              <span>Manage users</span>
+            </Link>
+          </li>
+        ) : (
+          <></>
+        )}
+        {data?.payload?.role === "owner" ? (
+          <li className="sidebar__item">
+            <Link
+              className={`sidebar__link ${
+                isActive("/admin/createUser") ? "active" : ""
+              }`}
+              to={"/admin/createUser"}
+            >
+              <AiOutlineProduct />
+              <span>Create user</span>
+            </Link>
+          </li>
+        ) : (
+          <></>
+        )}
 
         <li className="sidebar__item">
           <Link

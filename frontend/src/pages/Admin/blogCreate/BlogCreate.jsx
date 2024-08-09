@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCreateBlogMutation } from "../../../context/api/blogApi";
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 function BlogCreate() {
   const [form, setForm] = useState({ title: "", desc: "" });
@@ -11,20 +12,25 @@ function BlogCreate() {
   useEffect(() => {
     if (isSuccess) {
       setForm({ title: "", desc: "" });
+      message.success("Blog created successfully");
       navigate("/admin/blogManage");
     }
-  }, [isSuccess]);
+    if (isError) {
+      message.success("Something went wrong");
+    }
+  }, [isSuccess, isError]);
 
   const handleCreate = async () => {
     try {
       await createBlog(form);
     } catch (error) {
-      console.error("Failed to create blog:", error);
+      message.success("Something went wrong");
     }
   };
 
   const handleCancel = () => {
     setForm({ title: "", desc: "" });
+    navigate("/admin/blogManage");
   };
 
   return (

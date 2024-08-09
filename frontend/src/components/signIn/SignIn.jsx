@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Checkbox, Form, Input, notification, Space } from "antd";
+import { Button, Checkbox, Form, Input, message,  Space } from "antd";
 import { useSignInMutation } from "../../context/api/userApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../context/slices/authSlice";
@@ -10,23 +10,17 @@ const SignIn = () => {
   let navigate = useNavigate();
   const [signIn, { isLoading, isError, data, isSuccess }] = useSignInMutation();
   let isLogin = useSelector((state) => state.auth.token);
-  const [api, contextHolder] = notification.useNotification();
-  const openNotificationWithIcon = (type) => {
-    api[type]({
-      message:
-        type === "success" ? "Welcome" : "Username or password is incorrect",
-      description: " ",
-    });
-  };
+  
 
   useEffect(() => {
     if (isSuccess || isLogin) {
       dispatch(setToken(data?.payload?.token));
-      openNotificationWithIcon("success");
+      message.success("Blog deleted successfully");   
       navigate("/admin/blogManage");
     }
     if (isError) {
-      openNotificationWithIcon("error");
+      message.success("Username or password is incorrect");   
+      
     }
   }, [isSuccess, isError, isLogin]);
 

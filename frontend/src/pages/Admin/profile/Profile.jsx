@@ -89,9 +89,7 @@ const Profile = () => {
               Name: {form.fname} {form.lname}
             </p>
             <p className="text-lg font-semibold">Username: {form.username}</p>
-            <p className="text-lg font-semibold">
-              Email: {data?.payload.email}
-            </p>
+           
             <p className="text-lg font-semibold">Age: {form.age}</p>
             <p className="text-lg font-semibold">Budget: {form.budget}</p>
             <p className="text-lg font-semibold">Gender: {form.gender}</p>
@@ -147,6 +145,7 @@ const Profile = () => {
               value={form.budget}
               onChange={(e) => setForm({ ...form, budget: e.target.value })}
             />
+            
             <Input
               placeholder="Username"
               value={form.username}

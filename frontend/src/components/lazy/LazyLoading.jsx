@@ -1,10 +1,11 @@
 import React, { memo } from "react";
 import "./lazyLoading.scss";
+import { Spin } from "antd";
 
 const LazyLoading = () => {
   return (
     <div className="loader">
-      <div className="spinner"></div>
+      <Spin size="large"/>
     </div>
   );
 };

@@ -22,6 +22,7 @@ router.get("/api/users/search", UsersController.getUserSearch);
 router.post("/api/users/sign-up", UsersController.registerUser);
 router.post("/api/users/sign-in", UsersController.loginUser);
 router.patch("/api/users/:id", UsersController.updateUser);
+router.delete("/api/users/:id", UsersController.deleteUser);
 
 router.patch("/api/password", [auth], UsersController.resetPassword);
 

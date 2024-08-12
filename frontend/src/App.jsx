@@ -11,6 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 import BlogCreate from "./pages/Admin/blogCreate/BlogCreate.jsx";
 import BlogManage from "./pages/Admin/blogManage/BlogManage.jsx";
 import Profile from "./pages/Admin/profile/Profile.jsx";
+import UserCreate from "./pages/Admin/userCreate/UserCreate.jsx";
+import UserManage from "./pages/Admin/userManage/UserManage.jsx";
 
 const App = () => {
   let isLogin = useSelection(state => state.auth.token);
@@ -25,6 +27,8 @@ const App = () => {
         <Route path="/" element={<Auth />}>
           <Route path="admin" element={<Admin />}>
             <Route path="blogCreate" element={<BlogCreate />} />
+            <Route path="createUser" element={<UserCreate />} />
+            <Route path="userManage" element={<UserManage />} />
             <Route path="blogManage" element={<BlogManage />} />
             <Route path="profile" element={<Profile />} />
           </Route>

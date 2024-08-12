@@ -82,7 +82,7 @@ const Sidebar = () => {
               }`}
               to={"/admin/createUser"}
             >
-              <AiOutlineProduct />
+              <IoCreateOutline />
               <span>Create user</span>
             </Link>
           </li>

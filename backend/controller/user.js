@@ -216,6 +216,15 @@ class UsersController {
   }
   async getAllUsers(req, res) {
     try {
+      // let { value = "", limit = 3 } = req.query;
+      // let text = value.trim();
+      // if (!text) {
+      //   return res.status(400).json({
+      //     msg: "write something",
+      //     variant: "error",
+      //     payload: null,
+      //   });
+      // }
       const users = (await Users.find().sort({ createdAt: -1 })).filter(
         (el) => el.role !== "owner"
       );
@@ -255,6 +264,23 @@ class UsersController {
     } catch (err) {
       res.status(500).json({
         msg: err.message,
+        variant: "error",
+        payload: null,
+      });
+    }
+  }
+  async deleteUser(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await Users.findByIdAndDelete(id);
+      res.status(200).json({
+        msg: "user deleted",
+        variant: "success",
+        payload: user,
+      });
+    } catch (err) {
+      res.status(500).json({
+        msg: "Server error",
         variant: "error",
         payload: null,
       });

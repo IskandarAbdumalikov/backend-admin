@@ -16,6 +16,14 @@ export const userApi = api.injectEndpoints({
       }),
       providesTags: ["User"],
     }),
+    updateUser: build.mutation({
+      query: ({ id, body }) => ({
+        url: `/users/${id}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: ["User"],
+    }),
     getProfile: build.query({
       query: (params) => ({
         url: "/profile",
@@ -55,6 +63,13 @@ export const userApi = api.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    deleteUser: build.mutation({
+      query: (id) => ({
+        url: `/users/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -66,4 +81,6 @@ export const {
   useGetUsersBySearchQuery,
   useUpdateProfileMutation,
   useResetPasswordMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
 } = userApi;

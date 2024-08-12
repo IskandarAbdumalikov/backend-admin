@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Input,
@@ -18,9 +18,12 @@ import UpdateUserModal from "../../../components/updateUserModal/UpdateUserModal
 
 const UserManage = () => {
   const [search, setSearch] = useState("");
-  const { data: users, isLoading: usersLoading } = useGetUsersQuery();
-  const { data: searchData, isLoading: searchLoading } =
-    useGetUsersBySearchQuery({ value: search });
+  const { data: users, isLoading: usersLoading, refetch } = useGetUsersQuery();
+  const {
+    data: searchData,
+    isLoading: searchLoading,
+    refetch: refetchSearch,
+  } = useGetUsersBySearchQuery({ value: search }, { skip: !search });
   const [updateUser] = useUpdateUserMutation();
   const [deleteUser] = useDeleteUserMutation();
   const [selectedUser, setSelectedUser] = useState(null);
@@ -28,6 +31,14 @@ const UserManage = () => {
   const handleUpdate = (user) => {
     setSelectedUser(user);
   };
+
+  useEffect(() => {
+    if (search.trim().length === 0) {
+      refetch();
+    } else {
+      refetchSearch();
+    }
+  }, [search, refetch, refetchSearch]);
 
   const handleDelete = (id) => {
     deleteUser(id);
@@ -38,8 +49,7 @@ const UserManage = () => {
     setSelectedUser(null);
   };
 
-  const usersToRender =
-    searchData && Array.isArray(searchData) ? searchData : users;
+  const usersToRender = search.trim().length > 0 ? searchData : users;
 
   const columns = [
     {
@@ -92,7 +102,9 @@ const UserManage = () => {
             okText="Yes"
             cancelText="No"
           >
-            <Button type="danger">Delete</Button>
+            <Button type="danger" style={{ color: "red" }}>
+              Delete
+            </Button>
           </Popconfirm>
         </Space>
       ),

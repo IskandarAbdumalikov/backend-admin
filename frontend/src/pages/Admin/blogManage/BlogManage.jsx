@@ -66,6 +66,7 @@ function BlogManage() {
                 </Button>,
                 <Button
                   type="danger"
+                  style={{ color: "red" }}
                   onClick={() => showDeleteConfirm(item._id)}
                 >
                   Delete

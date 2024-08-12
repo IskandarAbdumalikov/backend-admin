@@ -53,7 +53,7 @@ export const userApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Profile"],
     }),
     registerUser: build.mutation({
       query: (body) => ({

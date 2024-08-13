@@ -253,7 +253,7 @@ class UsersController {
           payload: null,
         });
 
-      req.body.password = existingUser.password; //
+      req.body.password = existingUser.password; 
 
       let user = await Users.findByIdAndUpdate(id, req.body, { new: true });
       res.status(200).json({

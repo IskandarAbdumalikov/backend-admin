@@ -21,7 +21,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <h2 className="sidebar__logo">
-        <Link to={"/profile"}>
+        <Link to={"/admin/profile"}>
           <Avatar
             style={{
               backgroundColor: "white",
@@ -84,6 +84,36 @@ const Sidebar = () => {
             >
               <IoCreateOutline />
               <span>Create user</span>
+            </Link>
+          </li>
+        ) : (
+          <></>
+        )}
+        {data?.payload?.role === "owner" ? (
+          <li className="sidebar__item">
+            <Link
+              className={`sidebar__link ${
+                isActive("/admin/productsCreate") ? "active" : ""
+              }`}
+              to={"/admin/productsCreate"}
+            >
+              <IoCreateOutline />
+              <span>Create product</span>
+            </Link>
+          </li>
+        ) : (
+          <></>
+        )}
+        {data?.payload?.role === "owner" ? (
+          <li className="sidebar__item">
+            <Link
+              className={`sidebar__link ${
+                isActive("/admin/productsManage") ? "active" : ""
+              }`}
+              to={"/admin/productsManage"}
+            >
+              <AiOutlineProduct />
+              <span>Manage products</span>
             </Link>
           </li>
         ) : (
